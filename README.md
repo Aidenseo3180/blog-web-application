@@ -5,8 +5,8 @@ A blog web application that allows users with different access levels to make ch
 Create account in Claudinary, and copy and paste your CloudName, ApiKey, ApiSecret to appsetting.json  
 
 *To deploy to Azure DB*  
-Create Azure Db, connect to connectionstring in appsetting.json.
-Move Dbsets from local database to azure database by right click-task-
+Create Azure Db, connect to each of the connectionstrings in appsetting.json.  
+Move Dbsets from local database to azure database by right clicking the table from local db, 
 
 Change connectionstring of appsetting.json  
 To see errors during the deployment process, set ASPNETCORE_ENVIRONMENT to Development from Azure Server. 

@@ -6,4 +6,5 @@ Create account in Claudinary, and copy and paste your CloudName, ApiKey, ApiSecr
 
 *To deploy to Azure DB*  
 Change connectionstring of appsetting.json
-To see errors during the deployment process, set ASPNETCORE_ENVIRONMENT to Deployment from Azure Server.  
+To see errors during the deployment process, set ASPNETCORE_ENVIRONMENT to Deployment from Azure Server. 
+Steps: Go to App Service, Configuration, press New Application Setting, and add ASPNETCORE_ENVIRONMENT with value Deployment.

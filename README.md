@@ -10,4 +10,4 @@ Move Dbsets from local database to azure database by right click-task-
 
 Change connectionstring of appsetting.json  
 To see errors during the deployment process, set ASPNETCORE_ENVIRONMENT to Development from Azure Server. 
-Steps: Go to App Service, Configuration, press New Application Setting, and add ASPNETCORE_ENVIRONMENT with value Development.  
+Steps: Go to App Service, Configuration, press New Application Setting, and add ASPNETCORE_ENVIRONMENT to name, Development to value.  

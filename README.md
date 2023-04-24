@@ -17,5 +17,6 @@ Move Db from local database to azure database by right clicking the db from the 
 Change connectionstring of appsetting.json  
 - Find connectionstring from the Db that you want in Azure, go to connectionstring, copy ADO.NET(SQL authentication) connectionstring, paste to appsetting.json  
 - Put your password to connectionstring to connect to database  
+
 To see errors during the deployment process, set ASPNETCORE_ENVIRONMENT to Development from Azure Server.   
 Steps: Go to App Service, Configuration, press New Application Setting, and add ASPNETCORE_ENVIRONMENT to name, Development to value.  

@@ -1,0 +1,46 @@
+﻿@model Blog.Web.Models.ViewModels.HomeViewModel
+
+@{
+    ViewData["Title"] = "About Me";
+}
+
+<div class="container col-xx-8 px-4 py-5">
+    <div class="row align-items-center g-5 py-3">
+        <!-- div on left hand side -->
+        <div class="col-12 col-lg-6">
+            <div class="display-5 fw-bold lh-1 mb-3">
+                <h1>Hello,</h1>
+                <h4>My name is Aiden Seo</h4>
+            </div>
+            <p class="Lead">
+                I'm Aiden, the guy who designed a blog web application service called INICIO.
+                Currently, I am attending the University of Pittsburgh, where I am majoring in
+                Computer Engineering. I am deeply passionate about creating innovative web solutions and
+                bringing visions to life through my coding expertise and technical skills.
+            </p>
+        </div>
+
+        <!-- div on right hand side -->
+        <div class="col-12 col-lg-6">
+            <img src="~/img/profile.png"
+                 alt="INICIO: Aiden's Dev Blog"
+                 class="d-block mx-lg-auto img-fluid" width="300" />
+        </div>
+    </div>
+</div>
+
+<!-- portfolio -->
+<div class="container">
+    <div class="row justify-content-center" style="text-align: center">
+        <div>
+            <p>To know more about me, follow the link below to my Portfolio.</p>
+        </div>
+        <div>
+            <a target="_blank" href="https://aidenseo3180.github.io/">Aiden's Portfolio</a>
+        </div>
+        <div class="menutext py-3">
+            <a target="_blank" href="https://www.linkedin.com/in/aiden-seo-03004a248/"><i class="fa-brands fa-linkedin"></i></a>
+            <a target="_blank" href="https://github.com/Aidenseo3180"><i class="fa-brands fa-github"></i></a>
+        </div>
+    </div>
+</div>

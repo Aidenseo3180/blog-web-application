@@ -1,0 +1,67 @@
+﻿@*
+Things coming into View are list, so use List<>
+*@
+@model List<Blog.Web.Models.Domain.Tag>
+
+@{
+    ViewData["Title"] = "All Tags";
+}
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Show All Tags - Admin Functionality</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    <!-- Display alert message -->
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div class="alert alert-success">
+            <strong>Success </strong>@TempData["AlertMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" style="float: right">
+            </button>
+        </div>
+    }
+
+    <!-- if you want to use model that you get from controller, you say Model -->
+    <!-- Check either model is not null or has some object -->
+    @if (Model != null && Model.Any())
+    {
+        //create boostrap table so that we can iterate through the model & display values in table
+        //class table is boostrap class table
+        <table class="table">
+            <!-- thead = head of table-->
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Display Name</th>
+                    <th></th>   <!-- empty column name -->
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var tag in Model)
+                {
+                    <tr>
+                        <td>@tag.Id</td>
+                        <td>@tag.Name</td>
+                        <td>@tag.DisplayName</td>
+                        <td>
+                            <!-- when user click edit, we want to navigate to AdminTagsController & find action "edit" -->
+                            <!-- Only say AdminTags because it already knows that it's a controller (can ignore controller name) -->
+                            <!-- asp-route and attach id because id will be name of the route so that each user can be edited by id -->
+                            <a aps-area="" asp-controller="AdminTags"
+                            asp-action="Edit"
+                            asp-route-id="@tag.Id">Edit</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>No tags found</p>
+    }
+</div>

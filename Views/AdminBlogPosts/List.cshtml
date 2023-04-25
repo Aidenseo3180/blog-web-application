@@ -1,0 +1,82 @@
+﻿@* 
+    Since List is getting List of BlogPost (it has return View(blogPosts) so it gets IEnumerable blogPosts)
+*@
+@model List<Blog.Web.Models.Domain.BlogPost>
+@{
+    ViewData["Title"] = "All Blog Post";
+}
+
+<!-- heading, py-2 for padding on y axis -->
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>All BlogPost - Admin Functionality</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    <!-- Display alert message -->
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div class="alert alert-success">
+            <strong>Success </strong>@TempData["AlertMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" style="float: right">
+            </button>
+        </div>
+    }
+    @if (TempData["DangerMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Failed </strong>@TempData["DangerMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" style="float: right">
+            </button>
+        </div>
+    }
+
+    @if (Model != null && Model.Any())  //if model is not null & has some information
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>Id</td>
+                    <td>Heading</td>
+                    <td>Tags</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var blogPost in Model)
+                {
+                    <tr>
+                        <td>@blogPost.Id</td>
+                        <td>@blogPost.Heading</td>
+                        <td>
+                            <div class="d-flex">
+                                <!-- To get tags next to one another -->
+                                @foreach (var tag in blogPost.Tags)
+                                {
+                                    //loop through all tags, get their names (class badge is bootstrap)
+                                    //me-1 for margin end (margin between tags)
+                                    <span class="badge bg-secondary me-1">@tag.Name</span>
+                                }
+                            </div>
+                        </td>
+                        <td>
+                            <a asp-area=""
+                       asp-controller="AdminBlogPosts"
+                       asp-action="Edit"
+                       asp-route-id="@blogPost.Id">
+                                <!-- route it to id -->
+                                Edit
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+
+        </table>
+    }
+    else
+    {
+        <p>No Blog Posts Found</p>
+    }
+</div>

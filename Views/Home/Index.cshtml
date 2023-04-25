@@ -1,0 +1,127 @@
+﻿@*
+    Since HomeController Index uses both blog posts and tags
+*@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+
+@model Blog.Web.Models.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "Home Page";
+    int cnt = 0;
+}
+
+<!-- Create Hero section (images, texts, heading that correctly identify what blog is about, like short descrpition of blog) -->
+<div id="home" class="py-3" style="border-bottom: solid; border-bottom-width: thick; border-color: #E8C4C4;">
+    <div class="container col-xx-8 px-4 py-5">
+        <div class="row align-items-center g-5 py-5">
+           
+            <!-- div on left hand side -->
+            <div class="col-12 col-lg-6">
+                <h1 class="display-5 fw-bold lh-1 mb-3">
+                    INICIO: The Next Dev Blog
+                </h1>
+                <p class="Lead">
+                    Introducing INICIO, a sophisticated blog web application with advanced user access control,
+                    enabling seamless collaboration between users of different access levels. 
+                    With its elegant interface and intuitive design, this application allows users to 
+                    create captivating blog pages, complete with visually stunning images, descriptions, and more. 
+                    And with exclusive administrator privileges, only the chosen few can make crucial changes, 
+                    ensuring an unparalleled level of security and quality control.
+                    To learn more, create your account and receive weekly blog updates.
+                </p>
+            </div>
+
+            <!-- div on right hand side -->
+            <div class="col-12 col-lg-6">
+                <img src="https://images.pexels.com/photos/15654209/pexels-photo-15654209.jpeg?auto=compress&cs=tinysrgb&w=1200"
+                     alt="INICIO: Aiden's Dev Blog" 
+                     class="d-block mx-lg-auto img-fluid" width="300"/>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="py-1" style="border-bottom: solid; border-bottom-width: 9px; border-color: #2B3A55;">
+</div>
+
+<!-- Display result of blogpost -->
+<div class="container">
+    <!-- everything is placed in center -->
+    <div class="row justify-content-center">
+        <ul class="list-group list-group-flush">
+            <div class="mb-5 p-5" style="font-size: 16px">
+                <h2 class="display-5 fw-bold lh-1 mb-3">Recommended Blog Posts:</h2>
+                @if (Model != null && Model.BlogPosts.Any())
+                {
+                    foreach (var blog in Model.BlogPosts)
+                    {
+                        //Check the visibility
+                        if (blog.Visible == false)
+                        {
+                            //if not admin or not logged in, skip the blog
+                            if (signInManager.IsSignedIn(User) == false || User.IsInRole("Admin") == false)
+                            {
+                                continue;
+                            }
+                        }
+
+                        if (cnt < 3){   //set limit to number posts displayed from page
+                            cnt++;
+                        }
+                        else
+                        {
+                            break;
+                        }
+
+                        <div class="mb-4 py-3 blog-post-design">
+                            <!-- Connected to Index function in Blogs controller, passing blog.Urlhandle -->
+                            <a style="text-decoration: none; color: inherit; padding: 1px" 
+                                asp-area=""
+                                asp-controller="Blogs"
+                                asp-action="Index"
+                                asp-route-UrlHandle="@blog.UrlHandle"
+                                class="d-flex"
+                            >
+                                <!--left side-->
+                                <div class="col-12 col-lg-6 mb-3 mx-3">
+                                    <h4 class="mb-1">@blog.Heading</h4>
+
+                                    <p class="mb-1">
+                                        @foreach (var tag in blog.Tags)
+                                        {
+                                            <span class="badge bg-secondary me-1">@tag.Name</span>
+                                        }
+                                    </p>
+
+                                    <p class="mb-4">
+                                        Author: @blog.Author
+                                        <br />
+                                        Published Date: @blog.PublishedDate.ToShortDateString()
+                                    </p>
+                                    <p>
+                                        @blog.ShortDescription
+                                    </p>
+                                </div>
+
+                                <!--right side-->
+                                <div class="col-12 col-lg-3"
+                                     styles="display:table-cell; vertical-align:middle; text-align:center">
+                                    <img src="@blog.FeatureImageURL"
+                                         alt="@blog.Heading"
+                                         class="blog-image">
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div styld="text-align: center;">
+                        <p>Hmm..there seems to be no posts here</p>
+                    </div>
+                }
+            </div>
+        </ul>
+
+    </div>
+</div>

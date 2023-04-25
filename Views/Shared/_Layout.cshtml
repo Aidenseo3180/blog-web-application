@@ -1,0 +1,192 @@
+﻿@*To check if user has logged in or not*@
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - INICIO</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Blog.Web.styles.css" asp-append-version="true" />
+
+    <!-- Froala js for text editor -->
+    <link href='https://cdn.jsdelivr.net/npm/froala-editor@latest/css/froala_editor.pkgd.min.css' rel='stylesheet' type='text/css' />
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/froala-editor@latest/js/froala_editor.pkgd.min.js'></script>
+    <script src="https://kit.fontawesome.com/03cdc48b9c.js" crossorigin="anonymous"></script>
+
+</head>
+<body>
+    <div>
+        <header>
+            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow" style="background-color: #2B3A55; ">
+                <div class="container">
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                        <div class="d-flex align-items-center px-4 text-light">
+                            <img src="~/img/blog_logo.png" style="width: 80px; height:25px" class="me-1 mt-1" />
+                            <p style="margin: 0">| BLOG</p>
+                        </div>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                            aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item">
+                                <a class="nav-link text-light menu-btn"
+                                   asp-area=""
+                                   asp-controller="Home"
+                                   asp-action="Index">
+                                    Home
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light menu-btn"
+                                   asp-area=""
+                                   asp-controller="Home"
+                                   asp-action="AllPost">
+                                    Posts
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light menu-btn"
+                                   asp-area=""
+                                   asp-controller="Home"
+                                   asp-action="AboutMe">
+                                    About Me
+                                </a>
+                            </li>
+
+                            <!-- shown only when user is admin and signed in -->
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        Admin
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <!-- now AdminTagsController gets accessed bc of asp-controller, asp-action as Add from that file -->
+                                        <li>
+                                            <a class="dropdown-item"
+                                           asp-area=""
+                                           asp-controller="AdminTags"
+                                           asp-action="Add">
+                                                Add Tag
+                                            </a>
+                                        </li>
+
+                                        <!-- Access List, allows to edit tags -->
+                                        <li>
+                                            <a class="dropdown-item"
+                                           asp-area=""
+                                           asp-controller="AdminTags"
+                                           asp-action="List">
+                                                Edit Tags
+                                            </a>
+                                        </li>
+
+                                        <!-- For blog posts -->
+                                        <li>
+                                            <a class="dropdown-item"
+                                           asp-area=""
+                                           asp-controller="AdminBlogPosts"
+                                           asp-action="Add">
+                                                <!-- Access Add,cshtml from AdminBlogPosts -->
+                                                Add Blog Posts
+                                            </a>
+                                        </li>
+
+                                        <!-- navigate to All blogs page -->
+                                        <li>
+                                            <a class="dropdown-item"
+                                           asp-area=""
+                                           asp-controller="AdminBlogPosts"
+                                           asp-action="List">
+                                                Edit Blog Posts
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+                            @if (signInManager.IsSignedIn(User) && User.IsInRole("SuperAdmin"))
+                            {
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle text-light" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        SuperAdmin
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <a class="dropdown-item"
+                                           asp-area=""
+                                           asp-controller="AdminUsers"
+                                           asp-action="List">
+                                                All User
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
+
+                        </ul>
+
+                        <div class="d-flex align-items-center">
+
+                            @if (signInManager.IsSignedIn(User))
+                            {
+                                //if signed in
+                                <div class="me-3 text-dark bg-light" style="padding: 5px; border-radius: 5%">
+                                    @User?.Identity?.Name   <!-- If identity is not null, return name -->
+                                </div>
+                                <a class="btn me-3 text-light reg-log-btn"
+                               asp-area=""
+                               asp-controller="Account"
+                               asp-action="Logout">
+                                    Logout
+                                </a>
+                            }
+                            else
+                            {
+                                <a class="btn me-3 text-light reg-log-btn"
+                               asp-area=""
+                               asp-controller="Account"
+                               asp-action="Login">
+                                    Login
+                                </a>
+                                <a class="btn me-3 text-light reg-log-btn"
+                               asp-area=""
+                               asp-controller="Account"
+                               asp-action="Register">
+                                    Register
+                                </a>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <div>
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
+        <footer class="border-top footer text-muted">
+            <div class="py-1" style="background-color: #E8C4C4"></div>
+            <div class="py-2" style="background-color: #CE7777"></div>
+            <div style="background-color: #2B3A55">
+                <div class="container">
+                    All Rights Reserved &copy; Aiden Seo 2023 - Blog.Web
+                    <!-- - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a> -->
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

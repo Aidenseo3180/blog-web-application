@@ -1,0 +1,115 @@
+﻿@*Single blog post coming into page*@
+
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+@inject UserManager<IdentityUser> userManager
+
+@model Blog.Web.Models.ViewModels.BlogDetailsViewModel
+
+@{
+    @* Changes tab name (can be found in _Layout) as Model.PageTitle *@
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<div class="container my-5">
+    <!-- Display alert message -->
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            <strong>Success </strong>@TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" style="float: right">
+            </button>
+        </div>
+    }
+    @if (TempData["FailedMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Failed </strong>@TempData["FailedMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" style="float: right">
+            </button>
+        </div>
+    }
+
+    <div class="row justify-content-center">
+        <!-- col-lg-6 for large screen giving 6 columns wide, otherwise give col-12 -->
+        <div class="col-12 col-lg-6">
+
+            @if (Model != null)
+            {
+                <h1 class="mb-3">@Model.Heading</h1>
+                <!-- To show one in the left, one in the right. Space between texts, push each other against -->
+                <div class="d-flex justify-content-between">
+                    <span class="text-secondary">@Model.Author</span>
+                    <span class="text-secondary">@Model.PublishedDate.ToShortDateString()</span>
+                </div>
+
+                <div class="mb-3 d-flex">
+                    @foreach (var tag in Model.Tags)
+                    {
+                        <span class="badge bg-secondary me-1">@tag.Name</span>
+                    }
+                </div>
+
+                <img src="@Model.FeatureImageURL" class="d-block img-fluid mb-3" />
+
+                <div class="mb-3 blog-details-content">
+                    <!-- Since content has html tags(ex. div), use html raw to read its html tag and display appropriately -->
+                @Html.Raw(Model.Content)
+                </div>
+
+                <!-- 
+                //bootstrap class card
+                <div class="card">
+                    <div class="card-header">
+                        <h5>Comments</h5>
+
+                        @if (signInManager.IsSignedIn(User))
+                        {
+                            <form method="post">
+                                <div class="mb-3">
+                                    <label>Comment Description</label>
+                                    <input type="text" class="form-control" asp-for="CommentDescription" />
+                                </div>
+                                <div class="mb-3">
+                                    <button type="submit" class="btn btn-dark">Submit</button>
+                                    <input type="hidden" asp-for="Id" />
+                                    <input type="hidden" asp-for="UrlHandle" />
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            <p>In order to add comments, you must login</p>
+                        }
+                    </div>
+                    <div class="card-body">
+                        @if (Model.Comments != null && Model.Comments.Any())
+                        {
+                            //if not null & there's at least 1 comment
+                            @foreach (var comment in Model.Comments)
+                            {
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="text-secondary">@comment.Username</span>
+                                            <span class="text-secondary">@comment.DateAdded.ToShortDateString()</span>
+                                        </div>
+                                        <div>
+                                            @comment.Description
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                    </div>
+                </div>
+                -->
+            }
+            else
+            {
+                <p>Blog post no longer exist.</p>
+            }
+
+        </div>
+    </div>
+</div>

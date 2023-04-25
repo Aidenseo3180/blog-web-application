@@ -1,0 +1,78 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> signInManager
+@model Blog.Web.Models.ViewModels.HomeViewModel
+@{
+    ViewData["Title"] = "All Blog Post";
+}
+
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Show All Blog Posts</h1>
+    </div>
+</div>
+
+<!-- Display All blogposts -->
+<div class="container">
+    <!-- everything is placed in center -->
+    <div class="row justify-content-center">
+        <ul class="list-group list-group-flush">
+            <div class="mb-5 p-5" style="font-size: 16px">
+                @if (Model != null && Model.BlogPosts.Any())
+                {
+                    foreach (var blog in Model.BlogPosts)
+                    {
+                        //Check the visibility
+                        if (blog.Visible == false)
+                        {
+                            //if not admin or not logged in, skip the blog
+                            if (signInManager.IsSignedIn(User) == false || User.IsInRole("Admin") == false)
+                            {
+                                continue;
+                            }
+                        }
+
+                        <div class="mb-4 py-3 blog-post-design">
+                            <!-- Connected to Index function in Blogs controller, passing blog.Urlhandle -->
+                            <a style="text-decoration: none; color: inherit; padding: 1px"
+                               asp-area=""
+                               asp-controller="Blogs"
+                               asp-action="Index"
+                               asp-route-UrlHandle="@blog.UrlHandle"
+                               class="d-flex">
+                                <!--left side-->
+                                <div class="col-12 col-lg-6 mb-3 mx-3">
+                                    <h4 class="mb-1">@blog.Heading</h4>
+
+                                    <p class="mb-1">
+                                        @foreach (var tag in blog.Tags)
+                                        {
+                                            <span class="badge bg-secondary me-1">@tag.Name</span>
+                                        }
+                                    </p>
+
+                                    <p class="mb-4">
+                                        Author: @blog.Author
+                                        <br />
+                                        Published Date: @blog.PublishedDate.ToShortDateString()
+                                    </p>
+                                    <p>
+                                        @blog.ShortDescription
+                                    </p>
+                                </div>
+
+                                <!--right side-->
+                                <div class="col-12 col-lg-3"
+                                     styles="display:table-cell; vertical-align:middle; text-align:center">
+                                    <img src="@blog.FeatureImageURL"
+                                         alt="@blog.Heading"
+                                         class="blog-image">
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+        </ul>
+
+    </div>
+</div>

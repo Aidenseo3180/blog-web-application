@@ -1,0 +1,49 @@
+﻿@model Blog.Web.Models.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!-- Take username and password to login to system -->
+
+<div class="container mx-auto">
+    <div class="row justify-content-center">
+        <div class="col-12 col-lg-6">
+            <!-- Display alert message -->
+            @if (TempData["AlertMessage"] != null)
+            {
+                <div class="alert alert-danger mt-2">
+                    <strong>Failed </strong>@TempData["AlertMessage"]
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" style="float: right">
+                        <!-- data-bs-dismiss to close certain div using class name -->
+                    </button>
+                </div>
+            }
+
+            <!-- col-12 in small device, col-lg-6 in big device -->
+            <h1 class="mt-3 mb-3 h3">
+                Login
+            </h1>
+
+            <form method="post">
+                <div class="mb-3">
+                    <label class="form-label">Username</label>
+                    <input type="text" id="username" class="form-control" asp-for="Username" required/>
+                    <span class="text-danger" asp-validation-for="Username"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Password</label>
+                    <input type="password" id="password" class="form-control" asp-for="Password" required minlength="6"/>
+                    <span class="text-danger" asp-validation-for="Password"></span>
+                </div>
+
+                <div class="mb-3">
+                    <button type="submit" class="btn btn-dark">Login</button>
+                </div>
+
+                <input type="hidden" asp-for="ReturnUrl"/>
+
+            </form>
+        </div>
+    </div>
+</div>

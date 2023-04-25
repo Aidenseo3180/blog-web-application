@@ -1,0 +1,75 @@
+﻿@*
+Model binding, receive View return editTagReqeust 
+(by binding with model, now it understands what EditTagRequest object is
+*@
+@model Blog.Web.Models.ViewModels.EditTagRequest
+@{
+    ViewData["Title"] = "Edit Tags";
+}
+
+<!-- py-2 for padding on y axis -->
+<div class="bg-secondary bg-opacity-10 py-2">
+    <div class="container">
+        <h1>Edit Tag - Admin Functionality</h1>
+    </div>
+</div>
+
+<div class="container py-5">
+    <!-- Display alert message -->
+    @if (TempData["AlertMessage"] != null)
+    {
+        <div class="alert alert-danger">
+            <strong>Failed </strong>@TempData["AlertMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert" style="float: right">
+            </button>
+        </div>
+    }
+
+    <!-- We're not checking if model is null or not, just directly populating the result so wrap it inside if statement -->
+    <!-- Prevent wrong id passing through -->
+    @if (Model != null)
+    {
+        <!-- when submit form it goes to post method-->
+        <form method="post">
+            <!-- for ID -->
+            <div class="mb-3">
+                <!-- form-label, form-control, btn btn-dark to make things prettier, its a bootstrap class -->
+                <!-- use asp-for to connect and read -->
+                <label class="form-label">Id</label>
+                <!-- make it read only b/c we don't want admin to change id -->
+                <input type="text" id="id" class="form-control" asp-for="Id" readonly />
+            </div>
+
+            <!-- for Name -->
+            <div class="mb-3">
+                <label class="form-label">Display Name</label>
+                <input type="text" id="name" class="form-control" asp-for="Name" />
+            </div>
+
+            <!-- for Display Name -->
+            <div class="mb-3">
+                <label class="form-label">Tag Name</label>
+                <input type="text" id="displayName" class="form-control" asp-for="DisplayName" />
+            </div>
+
+            <div class="mb-3">
+                <!-- To put button side by side -->
+                <div class="d-flex">
+                    <button type="submit" class="btn btn-dark">Update</button>
+                    <!-- ms-2 to give space between submit and delete button -->
+                    <button class="btn btn-danger ms-2" type="submit"
+                        asp-area=""
+                        asp-controller="AdminTags"
+                        asp-action="Delete">
+                        Delete
+                    </button>
+                </div>
+            </div>
+        </form>
+    }
+    else
+    {
+        <p>Tag not found</p>
+    }
+
+</div>

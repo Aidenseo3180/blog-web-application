@@ -1,0 +1,82 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+/* prevent image overflow by keeping it within allocated space */
+.blog-details-content img {
+    max-width: 100%;
+}
+
+.blog-post-design {
+    border: 2px solid black;
+    border-radius: 10px;
+    background-color: #fafafa;
+    transition: background 0.5s;
+}
+
+    .blog-post-design:hover {
+        background-color: #F2E5E5;
+    }
+
+.blog-image {
+    padding-left: 100px;
+    padding-top: 30px;
+    height: 250px;
+}
+
+#home {
+    background: url(../img/home_background.png) no-repeat;
+    background-size: cover;
+}
+
+/* for nav buttons */
+.reg-log-btn {
+    transition: 0.5s;
+}
+
+    .reg-log-btn:hover {
+        background-color: #CE7777 !important;
+    }
+
+.menu-btn {
+    transition: 0.5s;
+}
+
+    .menu-btn:hover {
+        background-color: white !important;
+        color: black !important;
+    }
+
+.menutext {
+    text-align: center;
+}
+
+    .menutext a {
+        font-size: 30px;
+        color: black;
+        transition: .5s
+    }
+
+        .menutext a:hover {
+            color: #E8C4C4;
+        }

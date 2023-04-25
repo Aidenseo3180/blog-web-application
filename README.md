@@ -3,6 +3,7 @@
 ## Index
   
   - [About](#About) 
+  - [Overview](#Overview)
   - [Getting Started](#getting-started)
   - [License](#license)
 
@@ -10,6 +11,12 @@
 
 A blog web application that allows users with different access levels to make changes to the blog.  
 Used Microsoft SQL for the local database. ASP.NET Core 7.0, C#, and HTML-related skillsets were used.  
+
+## Overview
+
+The blog web application consists of 3 major access levels: user, admin, and superadmin  
+Admin can add, edit, and delete tags and blog posts  
+Superadmin can add and delete user with user and admin access level  
 
 ## Getting Started
 

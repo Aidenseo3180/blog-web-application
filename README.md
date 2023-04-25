@@ -18,6 +18,9 @@ The blog web application consists of 3 major access levels: user, admin, and sup
 Admin can add, edit, and delete tags and blog posts  
 Superadmin can add and delete user with user and admin access level  
 
+Superadmin has superadmin, admin, and user access levels  
+Admin has both the admin and user levels  
+
 ## Getting Started
 
 ### Installing

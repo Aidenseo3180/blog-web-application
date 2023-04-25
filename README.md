@@ -1,6 +1,9 @@
 # blog-web-application
 A blog web application that allows users with different access levels to make changes to the blog. Used Microsoft SQL for the local database. ASP .NET Core 7.0, C#, and HTML-related skillsets were used.  
 
+Migration
+
+
 *To use Claudinary*  
 Create account in Claudinary, and copy and paste your CloudName, ApiKey, ApiSecret to appsetting.json  
 
@@ -20,3 +23,7 @@ Change connectionstring of appsetting.json
 
 To see errors during the deployment process, set ASPNETCORE_ENVIRONMENT to Development from Azure Server.   
 Steps: Go to App Service, Configuration, press New Application Setting, and add ASPNETCORE_ENVIRONMENT to name, Development to value.  
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details

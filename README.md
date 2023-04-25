@@ -50,11 +50,8 @@ If Firewall problem occurs:
 *  Go to Microsoft Azure, your db server, Networking, and add new Firewall rule using your IP address.
 *  Also add the virtual IP address of web app in Azure to Db server Firewall rule.  
 
-Move Db from local database to azure database by right clicking the db from the localhost, Tasks, deploy database to Azure SQL database.  
-
-
-To see errors during the deployment process, set ASPNETCORE_ENVIRONMENT to Development from Azure Server.   
-Steps: Go to App Service, Configuration, press New Application Setting, and add ASPNETCORE_ENVIRONMENT to name, Development to value.  
+To see errors during the deployment process:
+* Set `ASPNETCORE_ENVIRONMENT` to Development from Azure Server. Go to App Service, Configuration, New Application Setting, and add ASPNETCORE_ENVIRONMENT to name, Development to value.
 
 ## License
 

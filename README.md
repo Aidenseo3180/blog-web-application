@@ -49,7 +49,7 @@ Update-Database -context "{DBContext}"
 
 ### How to use Claudinary
 
-Create account in Claudinary. Then, copy and paste your CloudName, ApiKey, ApiSecret to appsetting.json  
+Create account in Claudinary, copy and paste the CloudName, ApiKey, ApiSecret to appsetting.json  
 
 
 ## Deployment  

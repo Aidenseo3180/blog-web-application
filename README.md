@@ -42,7 +42,7 @@ To create a migration
 Add Migration "{comment}" -context "{DBContext}"
 ```
 
-To update the local database  
+To update the local database using the migration
 ```
 Update-Database -context "{DBContext}"
 ```

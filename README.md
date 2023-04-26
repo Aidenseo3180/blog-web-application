@@ -12,6 +12,7 @@
 
 A blog web application that allows users with different access levels to make changes to the blog  
 ASP.NET Core 7.0, C#, and front-end skillsets involved  
+![blog_home](https://user-images.githubusercontent.com/66958352/234617393-417b8410-ffae-49d1-97fe-63bae162bfae.png)
 
 
 ## Overview

@@ -60,6 +60,8 @@ Use a local database with Microsoft SQL Studio, connect to the application throu
 
 ## Deployment  
 
+Steps used to create a public domain of web application. It was unsuccessful, but here are the steps for those who are interested  
+
 1. Create Microsoft Azure account
 2. Right-click from project, click `Publish`
 3. Create Azure DB server by creating Id and Password

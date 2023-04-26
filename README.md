@@ -15,6 +15,7 @@ A blog web application that allows users with different access levels to make ch
 ASP.NET Core 7.0, C#, and front-end skillsets involved  
 
 ## Overview
+![blog-user](https://user-images.githubusercontent.com/66958352/234618090-c311b6e3-7323-4fea-94fe-d335afba759e.png)
 
 The blog web application consists of 3 major access levels: user, admin, and superadmin  
 Admin can add, edit, and delete tags and blog posts  

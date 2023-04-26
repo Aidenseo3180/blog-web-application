@@ -56,6 +56,7 @@ Create account in Claudinary, copy and paste the CloudName, ApiKey, ApiSecret to
 Create a web application project using ASP.NET Core and move files from the repository to corresponding folders   
 Use a local database with Microsoft SQL Studio, connect to the application through connectionstring in appsetting.json file   
 
+
 ## Deployment  
 
 1. Create Microsoft Azure account

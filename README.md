@@ -52,7 +52,7 @@ Update-Database -context "{DBContext}"
 
 Create account in Claudinary, copy and paste the CloudName, ApiKey, ApiSecret to appsetting.json  
 
-### To eproduce
+### To reproduce
 
 Create a web application project using ASP.NET Core and move files from the repository to corresponding folders   
 Use a local database with Microsoft SQL Studio, connect to the application through connectionstring in appsetting.json file   
